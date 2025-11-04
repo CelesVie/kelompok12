@@ -1,30 +1,27 @@
 <?php
-/**
- * User Login Page // Halaman login user, kayak gerbang masuk ke sistem.
- *
- * Handles user authentication and session creation // Urus autentikasi user dan bikin session, kayak cek ID dan kasih akses.
- */
+// Halaman login user
+// Urus autentikasi user dan bikin session, kayak cek ID dan kasih akses.
 
 require_once 'config.php'; // Include config, kayak panggil config buat koneksi.
 
 $error = ''; // Variabel error, kayak kotak komplain.
 
-// Redirect if already logged in // Redirect kalau udah login, kayak bilang "udah masuk kok".
+// Redirect kalau udah login, kayak bilang "udah masuk kok".
 if (isset($_SESSION['user_id'])) { // Cek apakah session user_id ada.
     header('Location: dashboard.php'); // Redirect ke dashboard.
     exit; // Stop.
 }
 
-// Handle form submission // Urus submit form, kayak proses check-in.
+// Urus submit form, kayak proses check-in.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau method POST.
     $username = trim($_POST['username'] ?? ''); // Ambil username, trim spasi.
     $password = $_POST['password'] ?? ''; // Ambil password.
 
-    // Validation // Validasi input, kayak cek tiket.
+    // Validasi input, kayak cek tiket.
     if (empty($username) || empty($password)) { // Kalau kosong.
         $error = 'Please enter both username and password.'; // Pesan error.
     } else { // Kalau ada.
-        // Query user // Query cari user, kayak cari nama di buku tamu.
+        // Query cari user, kayak cari nama di buku tamu.
         $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE username = ? OR email = ?"); // Prepare select.
         $stmt->bind_param("ss", $username, $username); // Bind username dua kali (username atau email).
         $stmt->execute(); // Eksekusi.
@@ -33,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau method POST.
         if ($result->num_rows === 1) { // Kalau ada satu user.
             $user = $result->fetch_assoc(); // Fetch data user.
 
-            // Verify password // Verifikasi password, kayak cocokin kunci.
+            // Verifikasi password
             if (password_verify($password, $user['password'])) { // Kalau password bener.
                 // Set session variables // Set variabel session, kayak isi kartu akses.
                 $_SESSION['user_id'] = $user['id']; // Set user ID.
@@ -41,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau method POST.
                 $_SESSION['role'] = $user['role']; // Set role.
                 $_SESSION['logged_in'] = true; // Set logged in.
 
-                // Redirect to dashboard // Redirect ke dashboard, kayak masuk ke ruangan utama.
+                // Redirect ke dashboard
                 header('Location: dashboard.php'); // Redirect.
                 exit; // Stop.
             } else { // Kalau password salah.
@@ -112,5 +109,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau method POST.
     </div>
 
     <script src="script.js"></script> <!-- Script. -->
-</body> <!-- Tutup body. -->
-</html> <!-- Tutup html. -->
+</body> 
+</html> 

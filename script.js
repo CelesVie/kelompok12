@@ -1,12 +1,9 @@
-/**
- * School Management System - Interactive Scripts // Script interaktif buat sistem sekolah, kayak vitamin buat halaman biar hidup.
- *
- * Handles smooth animations, form interactions, and UI enhancements // Urus animasi smooth, interaksi form, dan enhancement UI, kayak make-up biar cantik.
- */
+// Script interaktif buat sistem sekolah, kayak vitamin buat halaman biar hidup.
+// Urus animasi smooth, interaksi form, dan enhancement UI, kayak make-up biar cantik.
 
-// Wait for DOM to be fully loaded // Tunggu DOM fully loaded, kayak nunggu tamu datang dulu baru mulai party.
+// Tunggu DOM fully loaded, kayak nunggu tamu datang dulu baru mulai party.
 document.addEventListener('DOMContentLoaded', function() { // Event listener DOMContentLoaded.
-    // Initialize all interactive features // Inisialisasi semua fitur interaktif, kayak nyiapin semua alat dulu.
+    // Inisialisasi semua fitur interaktif, kayak nyiapin semua alat dulu.
     initAlertAutoDismiss(); // Panggil init alert.
     initFormValidation(); // Panggil init form validation.
     initSmoothScrolling(); // Panggil init smooth scrolling.
@@ -14,14 +11,12 @@ document.addEventListener('DOMContentLoaded', function() { // Event listener DOM
     initAnimations(); // Panggil init animations.
 });
 
-/**
- * Auto-dismiss alerts after 5 seconds // Auto-dismiss alert setelah 5 detik, kayak timer bom yang otomatis meledak.
- */
+// Auto-dismiss alert setelah 5 detik, kayak timer bom yang otomatis meledak.
 function initAlertAutoDismiss() { // Fungsi init alert auto dismiss.
     const alerts = document.querySelectorAll('.alert'); // Ambil semua alert.
 
     alerts.forEach(alert => { // Loop setiap alert.
-        // Add close button // Tambah tombol close, kayak pintu darurat.
+        // Tambah tombol close
         const closeBtn = document.createElement('span'); // Buat span buat close.
         closeBtn.innerHTML = '&times;'; // Isi dengan X.
         closeBtn.style.cssText = ` // Set style inline.
@@ -40,14 +35,12 @@ function initAlertAutoDismiss() { // Fungsi init alert auto dismiss.
         alert.style.position = 'relative'; // Set position relative.
         alert.appendChild(closeBtn); // Append close button.
 
-        // Auto-dismiss after 5 seconds // Auto dismiss setelah 5 detik.
+        // Auto dismiss setelah 5 detik.
         setTimeout(() => dismissAlert(alert), 5000); // Set timeout.
     });
 }
 
-/**
- * Dismiss alert with fade out animation // Dismiss alert dengan animasi fade out, kayak hilang pelan-pelan.
- */
+// Dismiss alert dengan animasi fade out, kayak hilang pelan-pelan.
 function dismissAlert(alert) { // Fungsi dismiss alert.
     alert.style.transition = 'opacity 0.3s ease, transform 0.3s ease'; // Set transition.
     alert.style.opacity = '0'; // Opacity 0.
@@ -58,9 +51,7 @@ function dismissAlert(alert) { // Fungsi dismiss alert.
     }, 300); // 300ms.
 }
 
-/**
- * Enhanced form validation with real-time feedback // Validasi form enhanced dengan feedback real-time, kayak cek ejaan langsung.
- */
+// Validasi form enhanced dengan feedback real-time, kayak cek ejaan langsung.
 function initFormValidation() { // Fungsi init form validation.
     const forms = document.querySelectorAll('form'); // Ambil semua form.
 
@@ -68,12 +59,12 @@ function initFormValidation() { // Fungsi init form validation.
         const inputs = form.querySelectorAll('input[required], textarea[required]'); // Ambil input required.
 
         inputs.forEach(input => { // Loop setiap input.
-            // Add visual feedback on blur // Tambah feedback visual on blur.
+            // Tambah feedback visual on blur.
             input.addEventListener('blur', function() { // Event blur.
                 validateInput(this); // Panggil validate input.
             });
 
-            // Remove error state on input // Hapus error state on input.
+            // Hapus error state on input.
             input.addEventListener('input', function() { // Event input.
                 if (this.classList.contains('error')) { // Kalau ada class error.
                     this.classList.remove('error'); // Remove class.
@@ -82,7 +73,7 @@ function initFormValidation() { // Fungsi init form validation.
             });
         });
 
-        // Form submission validation // Validasi submit form.
+        // Validasi submit form.
         form.addEventListener('submit', function(e) { // Event submit.
             let isValid = true; // Flag valid.
 
@@ -95,7 +86,7 @@ function initFormValidation() { // Fungsi init form validation.
             if (!isValid) { // Kalau ga valid.
                 e.preventDefault(); // Prevent default.
 
-                // Scroll to first error // Scroll ke first error.
+                // Scroll ke first error.
                 const firstError = form.querySelector('.error'); // Ambil first error.
                 if (firstError) { // Kalau ada.
                     firstError.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll.
@@ -106,21 +97,19 @@ function initFormValidation() { // Fungsi init form validation.
     });
 }
 
-/**
- * Validate individual input field // Validasi input field individual, kayak cek satu per satu.
- */
+// Validasi input field individual, kayak cek satu per satu.
 function validateInput(input) { // Fungsi validate input.
     const value = input.value.trim(); // Ambil value trim.
     let isValid = true; // Flag valid.
     let errorMessage = ''; // Pesan error.
 
-    // Required field check // Cek required.
+    // Cek required.
     if (input.hasAttribute('required') && !value) { // Kalau required dan kosong.
         isValid = false; // Ga valid.
         errorMessage = 'This field is required'; // Pesan.
     }
 
-    // Email validation // Validasi email.
+    // Validasi email.
     if (input.type === 'email' && value) { // Kalau type email dan ada value.
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex email.
         if (!emailRegex.test(value)) { // Kalau ga match.
@@ -129,7 +118,7 @@ function validateInput(input) { // Fungsi validate input.
         }
     }
 
-    // Password validation // Validasi password.
+    // Validasi password.
     if (input.type === 'password' && input.id === 'password' && value) { // Kalau password dan ada value.
         if (value.length < 6) { // Kalau kurang 6.
             isValid = false; // Ga valid.
@@ -137,7 +126,7 @@ function validateInput(input) { // Fungsi validate input.
         }
     }
 
-    // Confirm password validation // Validasi confirm password.
+    // Validasi confirm password.
     if (input.id === 'confirm_password' && value) { // Kalau confirm password.
         const password = document.getElementById('password'); // Ambil password.
         if (password && value !== password.value) { // Kalau ga sama.
@@ -146,7 +135,7 @@ function validateInput(input) { // Fungsi validate input.
         }
     }
 
-    // Update UI based on validation // Update UI berdasarkan validasi.
+    // Update UI berdasarkan validasi.
     if (!isValid) { // Kalau ga valid.
         input.classList.add('error'); // Add class error.
         input.style.borderColor = 'var(--color-danger)'; // Border merah.
@@ -160,9 +149,7 @@ function validateInput(input) { // Fungsi validate input.
     return isValid; // Return valid.
 }
 
-/**
- * Show error message below input // Show pesan error di bawah input, kayak caption di foto.
- */
+// Show pesan error di bawah input, kayak caption di foto.
 function showErrorMessage(input, message) { // Fungsi show error message.
     removeErrorMessage(input); // Remove dulu yang lama.
 
@@ -179,9 +166,7 @@ function showErrorMessage(input, message) { // Fungsi show error message.
     input.parentElement.appendChild(errorDiv); // Append ke parent.
 }
 
-/**
- * Remove error message // Remove pesan error, kayak hapus jejak.
- */
+// Remove pesan error, kayak hapus jejak.
 function removeErrorMessage(input) { // Fungsi remove error message.
     const errorMessage = input.parentElement.querySelector('.error-message'); // Cari error message.
     if (errorMessage) { // Kalau ada.
@@ -189,9 +174,7 @@ function removeErrorMessage(input) { // Fungsi remove error message.
     }
 }
 
-/**
- * Initialize smooth scrolling for anchor links // Init smooth scrolling buat anchor links, kayak naik eskalator pelan.
- */
+// Init smooth scrolling buat anchor links, kayak naik eskalator pelan.
 function initSmoothScrolling() { // Fungsi init smooth scrolling.
     document.querySelectorAll('a[href^="#"]').forEach(anchor => { // Loop anchor links.
         anchor.addEventListener('click', function(e) { // Event click.
@@ -207,14 +190,12 @@ function initSmoothScrolling() { // Fungsi init smooth scrolling.
     });
 }
 
-/**
- * Add interactive features to tables // Tambah fitur interaktif ke tabel, kayak bikin tabel bisa dance.
- */
+// Tambah fitur interaktif ke tabel, kayak bikin tabel bisa dance.
 function initTableInteractions() { // Fungsi init table interactions.
     const tableRows = document.querySelectorAll('.data-table tbody tr'); // Ambil rows tabel.
 
     tableRows.forEach(row => { // Loop rows.
-        // Add hover effect enhancement // Tambah hover effect, kayak efek cahaya.
+        // Tambah hover effect, kayak efek cahaya.
         row.addEventListener('mouseenter', function() { // Mouse enter.
             this.style.transform = 'scale(1.01)'; // Scale up.
             this.style.transition = 'all 0.2s ease'; // Transition.
@@ -226,9 +207,8 @@ function initTableInteractions() { // Fungsi init table interactions.
     });
 }
 
-/**
- * Initialize entrance animations for page elements // Init animasi entrance buat elemen halaman, kayak parade masuk.
- */
+
+// Init animasi entrance buat elemen halaman
 function initAnimations() { // Fungsi init animations.
     // Animate cards on page load // Animate cards saat load.
     const animatedElements = document.querySelectorAll('.auth-card, .dashboard-section, .form-card, .profile-card'); // Ambil elemen.
@@ -244,7 +224,7 @@ function initAnimations() { // Fungsi init animations.
         }, index * 100); // Delay per index.
     });
 
-    // Animate stats cards // Animate stats cards.
+    // Animate stats cards.
     const statCards = document.querySelectorAll('.stat-card'); // Ambil stat cards.
     statCards.forEach((card, index) => { // Loop cards.
         card.style.opacity = '0'; // Opacity 0.
@@ -258,9 +238,7 @@ function initAnimations() { // Fungsi init animations.
     });
 }
 
-/**
- * Add ripple effect to buttons // Tambah ripple effect ke buttons, kayak efek air jatuh.
- */
+// Tambah ripple effect ke buttons, kayak efek air jatuh.
 document.addEventListener('click', function(e) { // Event click global.
     if (e.target.matches('.btn, .btn-primary, .btn-secondary')) { // Kalau target button.
         const button = e.target; // Ambil button.
@@ -283,7 +261,7 @@ document.addEventListener('click', function(e) { // Event click global.
             pointer-events: none;
         `;
 
-        // Add ripple animation // Tambah animasi ripple.
+        // Tambah animasi ripple.
         const style = document.createElement('style'); // Buat style.
         style.textContent = ` // Isi style.
             @keyframes ripple {
@@ -307,9 +285,7 @@ document.addEventListener('click', function(e) { // Event click global.
     }
 });
 
-/**
- * Enhance role selector interactions // Enhance interaksi role selector, kayak bikin pilihan lebih menarik.
- */
+// Enhance interaksi role selector, kayak bikin pilihan lebih menarik.
 const roleOptions = document.querySelectorAll('.role-option'); // Ambil role options, kayak ambil semua kandidat.
 roleOptions.forEach(option => { // Loop setiap option.
     option.addEventListener('click', function() { // Event click.
@@ -317,7 +293,7 @@ roleOptions.forEach(option => { // Loop setiap option.
         if (radio) { // Kalau ada.
             radio.checked = true; // Set checked.
 
-            // Animate selection // Animate selection, kayak efek kilat.
+            // Animate selection, kayak efek kilat.
             const card = this.querySelector('.role-card'); // Ambil card.
             card.style.transform = 'scale(0.95)'; // Scale down.
             setTimeout(() => { // Set timeout.
@@ -327,27 +303,21 @@ roleOptions.forEach(option => { // Loop setiap option.
     });
 });
 
-/**
- * Add keyboard navigation support // Tambah support keyboard navigation, kayak aksesibilitas buat yang pake keyboard.
- */
+// Tambah support keyboard navigation, kayak aksesibilitas buat yang pake keyboard.
 document.addEventListener('keydown', function(e) { // Event keydown.
-    // ESC key to dismiss alerts // ESC buat dismiss alerts.
+    // ESC buat dismiss alerts.
     if (e.key === 'Escape') { // Kalau ESC.
         const alerts = document.querySelectorAll('.alert'); // Ambil alerts.
         alerts.forEach(alert => dismissAlert(alert)); // Dismiss semua.
     }
 });
 
-/**
- * Prevent form resubmission on page refresh // Prevent resubmit form saat refresh, kayak cegah double submit.
- */
+// Prevent resubmit form saat refresh, kayak cegah double submit.
 if (window.history.replaceState) { // Kalau support replaceState.
     window.history.replaceState(null, null, window.location.href); // Replace state.
 }
 
-/**
- * Add loading state to forms on submit // Tambah loading state ke form saat submit, kayak tunggu proses.
- */
+// Tambah loading state ke form saat submit, kayak tunggu proses.
 document.querySelectorAll('form').forEach(form => { // Loop semua form.
     form.addEventListener('submit', function(e) { // Event submit.
         const submitButton = this.querySelector('button[type="submit"]'); // Ambil submit button.
@@ -359,7 +329,7 @@ document.querySelectorAll('form').forEach(form => { // Loop semua form.
             const originalText = submitButton.textContent; // Simpan text asli.
             submitButton.textContent = 'Processing...'; // Ubah text.
 
-            // Re-enable after 3 seconds (fallback) // Re-enable setelah 3 detik fallback.
+            // Re-enable setelah 3 detik fallback.
             setTimeout(() => { // Set timeout.
                 submitButton.disabled = false; // Enable.
                 submitButton.style.opacity = '1'; // Opacity normal.

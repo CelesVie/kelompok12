@@ -1,16 +1,14 @@
 <?php
-/**
- * User Registration Page // Halaman registrasi user, kayak form daftar anggota baru.
- *
- * Handles new user registration with role selection (Teacher/Student) // Urus registrasi user baru dengan pilih role, kayak pilih paket membership.
- */
+// Halaman registrasi user, kayak form daftar anggota baru.
+// Urus registrasi user baru dengan pilih role
+
 
 require_once 'config.php'; // Include config.
 
 $error = ''; // Variabel error.
 $success = ''; // Variabel success.
 
-// Handle form submission // Urus submit form.
+// Urus submit form.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau POST.
     $username = trim($_POST['username'] ?? ''); // Ambil username.
     $email = trim($_POST['email'] ?? ''); // Ambil email.
@@ -18,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau POST.
     $confirm_password = $_POST['confirm_password'] ?? ''; // Ambil confirm password.
     $role = $_POST['role'] ?? ''; // Ambil role.
 
-    // Validation // Validasi.
+    // Validasi.
     if (empty($username) || empty($email) || empty($password) || empty($role)) { // Kalau ada kosong.
         $error = 'All fields are required.'; // Error.
     } elseif ($password !== $confirm_password) { // Kalau password ga sama.
@@ -30,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau POST.
     } elseif (!in_array($role, ['teacher', 'student'])) { // Kalau role ga valid.
         $error = 'Invalid role selected.'; // Error.
     } else { // Kalau valid.
-        // Check if username or email already exists // Cek duplikat.
+        // cek username atau email udah ada atau belum.
         $stmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?"); // Prepare cek.
         $stmt->bind_param("ss", $username, $email); // Bind.
         $stmt->execute(); // Eksekusi.
@@ -39,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau POST.
         if ($result->num_rows > 0) { // Kalau ada duplikat.
             $error = 'Username or email already exists.'; // Error.
         } else { // Kalau ga ada.
-            // Hash password and insert user // Hash password dan insert.
+            // Hash password dan insert.
             $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash.
             $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)"); // Prepare insert.
             $stmt->bind_param("ssss", $username, $email, $hashed_password, $role); // Bind.

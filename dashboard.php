@@ -1,11 +1,8 @@
 <?php
-/**
- * Dashboard Page // Halaman dashboard, kayak rumah utama setelah login.
- *
- * Main page after login - displays different content based on user role // Halaman utama setelah login, tampilkan konten beda berdasarkan role user, kayak menu berbeda buat VIP dan biasa.
- * Teachers: Can manage all students // Guru: Bisa atur semua siswa, kayak bos yang kontrol semua.
- * Students: Can view only their own data // Siswa: Cuma bisa lihat data sendiri, kayak baca rapor pribadi.
- */
+// Halaman dashboard, kayak rumah utama setelah login.
+// Halaman utama setelah login, tampilkan konten beda berdasarkan role user, kayak menu berbeda buat VIP dan biasa.
+// Guru: Bisa atur semua siswa, kayak bos yang kontrol semua.
+// Siswa: Cuma bisa lihat data sendiri, kayak baca rapor pribadi.
 
 require_once 'config.php'; // Include config, kayak panggil backup.
 
@@ -19,9 +16,9 @@ $user_id = $_SESSION['user_id']; // Ambil user ID dari session, kayak nomor iden
 $username = $_SESSION['username']; // Ambil username.
 $role = $_SESSION['role']; // Ambil role.
 
-// Get student data based on role // Ambil data siswa berdasarkan role, kayak pilih menu sesuai selera.
+// Ambil data siswa berdasarkan role, kayak pilih menu sesuai selera.
 if ($role === 'student') { // Kalau role student.
-    // Student sees only their own data // Siswa cuma lihat data sendiri.
+    // Siswa cuma lihat data sendiri.
     $stmt = $conn->prepare("SELECT * FROM students WHERE user_id = ?"); // Prepare query select.
     $stmt->bind_param("i", $user_id); // Bind user ID.
     $stmt->execute(); // Eksekusi.
@@ -29,7 +26,7 @@ if ($role === 'student') { // Kalau role student.
     $student_data = $result->fetch_assoc(); // Fetch data.
     $stmt->close(); // Tutup statement.
 } else { // Kalau bukan student (teacher).
-    // Teacher sees all students // Guru lihat semua siswa.
+    // Guru lihat semua siswa.
     $result = $conn->query("SELECT * FROM students ORDER BY created_at DESC"); // Query semua siswa.
     $all_students = $result->fetch_all(MYSQLI_ASSOC); // Fetch semua.
 }
@@ -44,7 +41,7 @@ if ($role === 'student') { // Kalau role student.
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!-- Link font. -->
 </head>
 <body> <!-- Body. -->
-    <!-- Navigation Bar --> <!-- Navbar. -->
+    <!-- Navigation Bar -->
     <nav class="navbar"> <!-- Tag nav. -->
         <div class="nav-container"> <!-- Container nav. -->
             <div class="nav-brand"> <!-- Brand. -->
@@ -62,7 +59,7 @@ if ($role === 'student') { // Kalau role student.
         </div>
     </nav>
 
-    <!-- Main Content --> <!-- Konten utama. -->
+    <!-- Main Content --> 
     <div class="main-container"> <!-- Container utama. -->
         <div class="content-wrapper"> <!-- Wrapper. -->
             <div class="page-header"> <!-- Header halaman. -->
@@ -71,7 +68,7 @@ if ($role === 'student') { // Kalau role student.
             </div>
 
             <?php if ($role === 'teacher'): ?> <!-- Kondisi kalau teacher. -->
-                <!-- Teacher View: Student Management --> <!-- View guru: Atur siswa. -->
+                <!-- View guru: Atur siswa. -->
                 <div class="dashboard-section"> <!-- Section dashboard. -->
                     <div class="section-header"> <!-- Header section. -->
                         <h2>Student Management</h2> <!-- Judul section. -->
@@ -143,7 +140,7 @@ if ($role === 'student') { // Kalau role student.
                 </div>
 
             <?php else: ?> <!-- Kondisi student. -->
-                <!-- Student View: Personal Data --> <!-- View siswa: Data pribadi. -->
+                <!-- View siswa: Data pribadi. -->
                 <div class="dashboard-section"> <!-- Section. -->
                     <div class="section-header"> <!-- Header. -->
                         <h2>My Information</h2> <!-- Judul. -->

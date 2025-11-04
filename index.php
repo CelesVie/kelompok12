@@ -1,9 +1,7 @@
 <?php
-/**
- * Index Page // Halaman index, kayak pintu masuk utama.
- * Automatically redirects to login page // Otomatis redirect ke login, kayak pintu otomatis.
- */
+// Halaman index
+// Otomatis redirect ke login
 
-header('Location: login.php'); // Redirect ke login, kayak arahin ke counter check-in.
-exit; // Stop eksekusi, biar ga lanjut ke bawah kayak rem darurat.
+header('Location: login.php'); // Redirect ke login
+exit; // Stop eksekusi, biar ga lanjut ke bawah
 ?>

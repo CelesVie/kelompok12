@@ -1,10 +1,4 @@
 <?php
-/**
- * CRUD Student Management Page (Teacher Only) // Halaman CRUD buat siswa, cuma guru yang bisa akses, kayak VIP room di club.
- *
- * Handles Create, Read, Update, Delete operations for student data // Urus operasi CRUD buat data siswa, kayak bos yang atur semua pegawai.
- */
-
 require_once 'config.php'; // Include config, kayak panggil temen buat bantu kerjaan.
 
  // Cek apakah user udah login dan role-nya teacher, kalau enggak ya redirect, kayak security di mall yang ngecek tiket.
@@ -23,7 +17,7 @@ $student_id = $_GET['id'] ?? null; // Ambil ID siswa dari URL, kalau ada, kayak 
 $error = ''; // Variabel buat error message, kayak kotak saran buat komplain.
 $success = ''; // Variabel buat success message, kayak badge penghargaan.
 
-// Handle DELETE action // Urus aksi delete, kayak hapus file yang ga penting.
+// Urus aksi delete, kayak hapus file yang ga penting.
 if ($action === 'delete' && $student_id) { // Kalau action delete dan ada ID siswa.
     $stmt = $conn->prepare("DELETE FROM students WHERE id = ?"); // Prepare statement buat delete, kayak siapin pisau buat potong.
     $stmt->bind_param("i", $student_id); // Bind parameter ID, kayak isi bahan ke pisau.
@@ -36,7 +30,7 @@ if ($action === 'delete' && $student_id) { // Kalau action delete dan ada ID sis
     $stmt->close(); // Tutup statement, kayak tutup pintu setelah keluar.
 }
 
-// Handle CREATE/UPDATE form submission // Urus submit form buat create atau update, kayak proses order di resto.
+// Urus submit form buat create atau update, kayak proses order di resto.
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['create', 'edit'])) { // Kalau method POST dan action create/edit.
     $name = trim($_POST['name'] ?? ''); // Ambil nama, trim spasi, kayak bersihin debu.
     $student_id_number = trim($_POST['student_id'] ?? ''); // Ambil student ID, trim juga.
@@ -45,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['create', 'edit'
     $phone = trim($_POST['phone'] ?? ''); // Ambil phone.
     $address = trim($_POST['address'] ?? ''); // Ambil address.
 
-    // Validation // Validasi input, kayak cek apakah bahan masak fresh.
+    // Validasi input, kayak cek apakah bahan masak fresh.
     if (empty($name) || empty($student_id_number) || empty($email)) { // Kalau ada yang kosong.
         $error = 'Name, Student ID, and Email are required fields.'; // Pesan error, kayak "Wajib diisi dong!".
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) { // Kalau email ga valid.
         $error = 'Invalid email format.'; // Pesan error email.
     } else { // Kalau validasi lolos.
         if ($action === 'create') { // Kalau create.
-            // Check if student_id already exists // Cek apakah student ID udah ada, kayak cek nomor KTP.
+            // Cek apakah student ID udah ada, kayak cek nomor KTP.
             $stmt = $conn->prepare("SELECT id FROM students WHERE student_id = ?"); // Query cek duplikat.
             $stmt->bind_param("s", $student_id_number); // Bind parameter.
             $stmt->execute(); // Eksekusi.
@@ -61,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['create', 'edit'
             if ($result->num_rows > 0) { // Kalau ada duplikat.
                 $error = 'Student ID already exists.'; // Pesan error duplikat.
             } else { // Kalau ga ada.
-                // Insert new student // Insert siswa baru, kayak daftar anggota baru.
+                // Insert siswa baru, kayak daftar anggota baru.
                 $stmt = $conn->prepare("INSERT INTO students (name, student_id, email, grade, phone, address) VALUES (?, ?, ?, ?, ?, ?)"); // Prepare insert.
                 $stmt->bind_param("ssssss", $name, $student_id_number, $email, $grade, $phone, $address); // Bind semua parameter.
 
@@ -93,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['create', 'edit'
     }
 }
 
-// Get student data for edit/view // Ambil data siswa buat edit atau view, kayak ambil file dari arsip.
+// Ambil data siswa buat edit atau view, kayak ambil file dari arsip.
 $student_data = null; // Inisialisasi variabel.
 if (in_array($action, ['edit', 'view']) && $student_id) { // Kalau action edit/view dan ada ID.
     $stmt = $conn->prepare("SELECT * FROM students WHERE id = ?"); // Prepare select.
@@ -109,7 +103,7 @@ if (in_array($action, ['edit', 'view']) && $student_id) { // Kalau action edit/v
     }
 }
 
-// Get all students for list view // Ambil semua siswa buat list, kayak daftar nama di kelas.
+// Ambil semua siswa buat list, kayak daftar nama di kelas.
 if ($action === 'list') { // Kalau action list.
     $result = $conn->query("SELECT * FROM students ORDER BY created_at DESC"); // Query semua siswa, urut berdasarkan created_at.
     $all_students = $result->fetch_all(MYSQLI_ASSOC); // Fetch semua sebagai array.
@@ -125,7 +119,7 @@ if ($action === 'list') { // Kalau action list.
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!-- Link font Google, kayak pilih font keren. -->
 </head>
 <body> <!-- Body halaman, kayak badan manusia. -->
-    <!-- Navigation Bar --> <!-- Navbar, kayak menu utama di resto. -->
+    <!-- Navigation Bar --> 
     <nav class="navbar"> <!-- Tag nav, kayak navigasi kapal. -->
         <div class="nav-container"> <!-- Container nav, kayak kotak buat barang. -->
             <div class="nav-brand"> <!-- Brand nav, kayak logo merek. -->
@@ -139,11 +133,11 @@ if ($action === 'list') { // Kalau action list.
         </div>
     </nav>
 
-    <!-- Main Content --> <!-- Konten utama, kayak hidangan utama. -->
+    <!-- Main Content --> 
     <div class="main-container"> <!-- Container utama, kayak wadah besar. -->
         <div class="content-wrapper"> <!-- Wrapper konten, kayak bungkus kado. -->
             <?php if ($action === 'list'): ?> <!-- Kondisi kalau action list, kayak pilih menu list. -->
-                <!-- List View --> <!-- View list, kayak daftar belanja. -->
+                <!-- list view, kayak daftar belanja. -->
                 <div class="page-header"> <!-- Header halaman, kayak judul artikel. -->
                     <div> <!-- Div wrapper. -->
                         <h1>Student Management</h1> <!-- Judul h1, kayak headline berita. -->
@@ -201,7 +195,7 @@ if ($action === 'list') { // Kalau action list.
                 <?php endif; ?>
 
             <?php elseif ($action === 'create' || $action === 'edit'): ?> <!-- Kondisi create atau edit. -->
-                <!-- Create/Edit Form --> <!-- Form create/edit, kayak formulir pendaftaran. -->
+                <!-- Create/Edit Form --> 
                 <div class="page-header"> <!-- Header halaman. -->
                     <div> <!-- Wrapper. -->
                         <h1><?php echo $action === 'create' ? 'Add New Student' : 'Edit Student'; ?></h1> <!-- Judul dinamis. -->
@@ -304,7 +298,7 @@ if ($action === 'list') { // Kalau action list.
                 </div>
 
             <?php elseif ($action === 'view' && $student_data): ?> <!-- Kondisi view dan ada data. -->
-                <!-- View Details --> <!-- View detail, kayak baca CV. -->
+                <!-- View Details -->
                 <div class="page-header"> <!-- Header. -->
                     <div> <!-- Wrapper. -->
                         <h1>Student Details</h1> <!-- Judul. -->
@@ -351,10 +345,10 @@ if ($action === 'list') { // Kalau action list.
                         </div>
                     </div>
                 </div>
-            <?php endif; ?> <!-- Tutup kondisi action. -->
-        </div> <!-- Tutup content-wrapper. -->
-    </div> <!-- Tutup main-container. -->
+            <?php endif; ?> 
+        </div> 
+    </div> 
 
-    <script src="script.js"></script> <!-- Script JS, kayak vitamin buat halaman. -->
-</body> <!-- Tutup body. -->
-</html> <!-- Tutup html. -->
+    <script src="script.js"></script> <!-- Script JS -->
+</body> 
+</html> 
