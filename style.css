@@ -1,0 +1,779 @@
+* { /* Reset semua elemen, kayak bersihin papan tulis sebelum mulai nulis. */
+    margin: 0; /* Margin 0. */
+    padding: 0; /* Padding 0. */
+    box-sizing: border-box; /* Box-sizing border-box, biar kalkulasi lebih mudah. */
+}
+
+:root { /* Root variables, kayak gudang penyimpanan variabel global. */
+    --color-primary: #007AFF; /* Primary color biru Apple. */
+    --color-primary-hover: #0051D5; /* Hover primary lebih gelap. */
+    --color-secondary: #8E8E93; /* Secondary abu-abu. */
+    --color-success: #34C759; /* Success hijau. */
+    --color-warning: #FF9500; /* Warning orange. */
+    --color-danger: #FF3B30; /* Danger merah. */
+    --color-info: #5AC8FA; /* Info biru muda. */
+
+    --color-white: #FFFFFF; /* Putih. */
+    --color-gray-50: #F9FAFB; /* Abu terang. */
+    --color-gray-100: #F2F2F7; /* Abu lebih terang. */
+    --color-gray-200: #E5E5EA; /* Abu sedang. */
+    --color-gray-300: #D1D1D6; /* Abu gelap. */
+    --color-gray-400: #C7C7CC; /* Abu lebih gelap. */
+    --color-gray-500: #AEAEB2; /* Abu tua. */
+    --color-gray-600: #8E8E93; /* Abu lebih tua. */
+    --color-gray-700: #636366; /* Abu gelap banget. */
+    --color-gray-800: #48484A; /* Abu hitam. */
+    --color-gray-900: #1C1C1E; /* Hitam. */
+
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; /* Font family Inter. */
+    --font-weight-light: 300; /* Light weight. */
+    --font-weight-normal: 400; /* Normal weight. */
+    --font-weight-medium: 500; /* Medium weight. */
+    --font-weight-semibold: 600; /* Semibold weight. */
+    --font-weight-bold: 700; /* Bold weight. */
+
+    --spacing-xs: 0.25rem; /* Spacing extra small. */
+    --spacing-sm: 0.5rem; /* Small. */
+    --spacing-md: 1rem; /* Medium. */
+    --spacing-lg: 1.5rem; /* Large. */
+    --spacing-xl: 2rem; /* Extra large. */
+    --spacing-2xl: 3rem; /* Double extra large. */
+
+    --radius-sm: 0.5rem; /* Radius small. */
+    --radius-md: 0.75rem; /* Medium. */
+    --radius-lg: 1rem; /* Large. */
+    --radius-xl: 1.25rem; /* Extra large. */
+    --radius-2xl: 1.5rem; /* Double extra large. */
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* Shadow small. */
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Medium. */
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Large. */
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Extra large. */
+
+    --transition-fast: 150ms ease; /* Transition cepat. */
+    --transition-base: 250ms ease; /* Base. */
+    --transition-slow: 350ms ease; /* Lambat. */
+}
+
+body { /* Body styling, kayak atur tampilan badan halaman. */
+    font-family: var(--font-family); /* Font family. */
+    font-weight: var(--font-weight-normal); /* Weight normal. */
+    background-color: var(--color-gray-50); /* Background abu terang. */
+    color: var(--color-gray-900); /* Text hitam. */
+    line-height: 1.5; /* Line height. */
+    -webkit-font-smoothing: antialiased; /* Font smoothing webkit. */
+    -moz-osx-font-smoothing: grayscale; /* Moz smoothing. */
+}
+
+.auth-container { /* Container auth, kayak kotak buat form login/register. */
+    min-height: 100vh; /* Min height full viewport. */
+    display: flex; /* Flex display. */
+    align-items: center; /* Align center. */
+    justify-content: center; /* Justify center. */
+    padding: var(--spacing-lg); /* Padding. */
+    background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-white) 100%); /* Background gradient. */
+}
+
+.auth-card { /* Card auth, kayak kartu nama. */
+    width: 100%; /* Width full. */
+    max-width: 480px; /* Max width. */
+    background: var(--color-white); /* Background putih. */
+    border-radius: var(--radius-2xl); /* Border radius. */
+    padding: var(--spacing-2xl); /* Padding. */
+    box-shadow: var(--shadow-xl); /* Shadow. */
+    animation: slideUp 0.5s ease; /* Animation slide up. */
+    -webkit-border-radius: var(--radius-2xl); /* Webkit border radius. */
+    -moz-border-radius: var(--radius-2xl); /* Moz border radius. */
+    -ms-border-radius: var(--radius-2xl); /* Ms border radius. */
+    -o-border-radius: var(--radius-2xl); /* O border radius. */
+    -webkit-animation: slideUp 0.5s ease; /* Webkit animation. */
+}
+
+@keyframes slideUp { /* Keyframe slide up, kayak animasi naik. */
+    from { /* From. */
+        opacity: 0; /* Opacity 0. */
+        transform: translateY(20px); /* Translate down. */
+        -webkit-transform: translateY(20px); /* Webkit transform. */
+        -moz-transform: translateY(20px); /* Moz transform. */
+        -ms-transform: translateY(20px); /* Ms transform. */
+        -o-transform: translateY(20px); /* O transform. */
+}
+    to { /* To. */
+        opacity: 1; /* Opacity 1. */
+        transform: translateY(0); /* Translate 0. */
+        -webkit-transform: translateY(0); /* Webkit transform. */
+        -moz-transform: translateY(0); /* Moz transform. */
+        -ms-transform: translateY(0); /* Ms transform. */
+        -o-transform: translateY(0); /* O transform. */
+}
+}
+
+.auth-header { /* Header auth, kayak judul kartu. */
+    text-align: center; /* Text center. */
+    margin-bottom: var(--spacing-2xl); /* Margin bottom. */
+}
+
+.auth-header h1 { /* H1 di header. */
+    font-size: 2rem; /* Font size. */
+    font-weight: var(--font-weight-bold); /* Weight bold. */
+    color: var(--color-gray-900); /* Color. */
+    margin-bottom: var(--spacing-sm); /* Margin bottom. */
+}
+
+.auth-header p { /* P di header. */
+    font-size: 0.95rem; /* Font size. */
+    color: var(--color-gray-600); /* Color. */
+}
+
+.auth-form, .crud-form { /* Form auth dan crud. */
+    display: flex; /* Flex. */
+    flex-direction: column; /* Direction column. */
+    gap: var(--spacing-lg); /* Gap. */
+}
+
+.form-group { /* Group form, kayak kelompok input. */
+    display: flex; /* Flex. */
+    flex-direction: column; /* Column. */
+    gap: var(--spacing-sm); /* Gap. */
+}
+
+.form-group label { /* Label di group. */
+    font-size: 0.875rem; /* Font size. */
+    font-weight: var(--font-weight-medium); /* Weight. */
+    color: var(--color-gray-700); /* Color. */
+}
+
+.form-group input, /* Input. */
+.form-group textarea, /* Textarea. */
+.form-group select { /* Select. */
+    width: 100%; /* Width full. */
+    padding: 0.75rem 1rem; /* Padding. */
+    font-size: 1rem; /* Font size. */
+    font-family: var(--font-family); /* Font family. */
+    color: var(--color-gray-900); /* Color. */
+    background-color: var(--color-white); /* Background. */
+    border: 1.5px solid var(--color-gray-300); /* Border. */
+    border-radius: var(--radius-lg); /* Border radius. */
+    transition: all var(--transition-base); /* Transition. */
+}
+
+.form-group input:focus, /* Focus input. */
+.form-group textarea:focus, /* Focus textarea. */
+.form-group select:focus { /* Focus select. */
+    outline: none; /* No outline. */
+    border-color: var(--color-primary); /* Border primary. */
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1); /* Box shadow. */
+}
+
+.form-group textarea { /* Textarea. */
+    resize: vertical; /* Resize vertical. */
+    min-height: 100px; /* Min height. */
+}
+
+.form-row { /* Row form, kayak baris input. */
+    display: grid; /* Grid. */
+    grid-template-columns: 1fr 1fr; /* 2 kolom. */
+    gap: var(--spacing-lg); /* Gap. */
+}
+
+@media (max-width: 768px) { /* Media query mobile. */
+    .form-row { /* Form row. */
+        grid-template-columns: 1fr; /* 1 kolom. */
+    }
+}
+
+.role-selector { /* Selector role, kayak pilihan role. */
+    display: grid; /* Grid. */
+    grid-template-columns: 1fr 1fr; /* 2 kolom. */
+    gap: var(--spacing-md); /* Gap. */
+}
+
+.role-option { /* Option role. */
+    cursor: pointer; /* Cursor pointer. */
+}
+
+.role-option input[type="radio"] { /* Radio input. */
+    display: none; /* Hidden. */
+}
+
+.role-card { /* Card role. */
+    display: flex; /* Flex. */
+    flex-direction: column; /* Column. */
+    align-items: center; /* Align center. */
+    padding: var(--spacing-lg); /* Padding. */
+    background: var(--color-gray-50); /* Background. */
+    border: 2px solid var(--color-gray-200); /* Border. */
+    border-radius: var(--radius-xl); /* Border radius. */
+    transition: all var(--transition-base); /* Transition. */
+    cursor: pointer; /* Cursor. */
+}
+
+.role-card:hover { /* Hover card. */
+    background: var(--color-white); /* Background putih. */
+    border-color: var(--color-gray-400); /* Border gelap. */
+    transform: translateY(-2px); /* Translate up. */
+    box-shadow: var(--shadow-md); /* Shadow. */
+}
+
+.role-option input[type="radio"]:checked + .role-card { /* Checked radio. */
+    background: var(--color-white); /* Background. */
+    border-color: var(--color-primary); /* Border primary. */
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1); /* Box shadow. */
+}
+
+.role-icon { /* Icon role. */
+    font-size: 2.5rem; /* Font size. */
+    margin-bottom: var(--spacing-sm); /* Margin bottom. */
+}
+
+.role-title { /* Title role. */
+    font-weight: var(--font-weight-semibold); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+    margin-bottom: var(--spacing-xs); /* Margin. */
+}
+
+.role-desc { /* Desc role. */
+    font-size: 0.875rem; /* Font size. */
+    color: var(--color-gray-600); /* Color. */
+}
+
+.btn { /* Button base. */
+    display: inline-flex; /* Inline flex. */
+    align-items: center; /* Align center. */
+    justify-content: center; /* Justify center. */
+    gap: var(--spacing-sm); /* Gap. */
+    padding: 0.75rem 1.5rem; /* Padding. */
+    font-size: 1rem; /* Font size. */
+    font-weight: var(--font-weight-medium); /* Weight. */
+    text-decoration: none; /* No decoration. */
+    border: none; /* No border. */
+    border-radius: var(--radius-lg); /* Border radius. */
+    cursor: pointer; /* Cursor. */
+    transition: all var(--transition-base); /* Transition. */
+    white-space: nowrap; /* White space. */
+}
+
+.btn-primary { /* Primary button. */
+    color: var(--color-white); /* Color putih. */
+    background-color: var(--color-primary); /* Background primary. */
+}
+
+.btn-primary:hover { /* Hover primary. */
+    background-color: var(--color-primary-hover); /* Background hover. */
+    transform: translateY(-1px); /* Translate up. */
+    box-shadow: var(--shadow-md); /* Shadow. */
+}
+
+.btn-secondary { /* Secondary button. */
+    color: var(--color-gray-700); /* Color abu. */
+    background-color: var(--color-gray-100); /* Background abu. */
+}
+
+.btn-secondary:hover { /* Hover secondary. */
+    background-color: var(--color-gray-200); /* Background lebih terang. */
+}
+
+.btn-danger { /* Danger button. */
+    color: var(--color-white); /* Putih. */
+    background-color: var(--color-danger); /* Merah. */
+}
+
+.btn-danger:hover { /* Hover danger. */
+    background-color: #E32929; /* Merah gelap. */
+}
+
+.btn-sm { /* Small button. */
+    padding: 0.5rem 1rem; /* Padding kecil. */
+    font-size: 0.875rem; /* Font kecil. */
+}
+
+.btn-icon { /* Icon button. */
+    padding: 0.5rem; /* Padding. */
+    font-size: 1.25rem; /* Font. */
+    background: transparent; /* Background transparan. */
+    border: none; /* No border. */
+    cursor: pointer; /* Cursor. */
+    transition: all var(--transition-fast); /* Transition. */
+    text-decoration: none; /* No decoration. */
+}
+
+.btn-icon:hover { /* Hover icon. */
+    transform: scale(1.2); /* Scale up. */
+}
+
+.action-buttons { /* Action buttons. */
+    display: flex; /* Flex. */
+    gap: var(--spacing-sm); /* Gap. */
+}
+
+.alert { /* Alert base. */
+    padding: 1rem 1.25rem; /* Padding. */
+    border-radius: var(--radius-lg); /* Border radius. */
+    margin-bottom: var(--spacing-lg); /* Margin bottom. */
+    font-size: 0.95rem; /* Font size. */
+    animation: slideDown 0.3s ease; /* Animation. */
+}
+
+@keyframes slideDown { /* Keyframe slide down. */
+    from { /* From. */
+        opacity: 0; /* Opacity 0. */
+        transform: translateY(-10px); /* Translate up. */
+    }
+    to { /* To. */
+        opacity: 1; /* Opacity 1. */
+        transform: translateY(0); /* Translate 0. */
+    }
+}
+
+.alert-error { /* Error alert. */
+    color: #991B1B; /* Color merah. */
+    background-color: #FEE2E2; /* Background merah muda. */
+    border: 1px solid #FECACA; /* Border. */
+}
+
+.alert-success { /* Success alert. */
+    color: #065F46; /* Hijau. */
+    background-color: #D1FAE5; /* Hijau muda. */
+    border: 1px solid #A7F3D0; /* Border. */
+}
+
+.navbar { /* Navbar. */
+    background: rgba(255, 255, 255, 0.8); /* Background transparan. */
+    backdrop-filter: blur(20px); /* Backdrop blur. */
+    -webkit-backdrop-filter: blur(20px); /* Webkit. */
+    border-bottom: 1px solid var(--color-gray-200); /* Border bottom. */
+    position: sticky; /* Sticky. */
+    top: 0; /* Top 0. */
+    z-index: 1000; /* Z-index. */
+}
+
+.nav-container { /* Container nav. */
+    max-width: 1400px; /* Max width. */
+    margin: 0 auto; /* Margin auto. */
+    padding: 1rem 1.5rem; /* Padding. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    justify-content: space-between; /* Justify space between. */
+}
+
+.nav-brand { /* Brand nav. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    gap: var(--spacing-sm); /* Gap. */
+    font-weight: var(--font-weight-semibold); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+}
+
+.brand-icon { /* Icon brand. */
+    font-size: 1.5rem; /* Font size. */
+}
+
+.brand-text { /* Text brand. */
+    font-size: 1.125rem; /* Font size. */
+}
+
+.nav-menu { /* Menu nav. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    gap: var(--spacing-md); /* Gap. */
+}
+
+.nav-user { /* User nav. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    gap: var(--spacing-sm); /* Gap. */
+    padding: 0.5rem 1rem; /* Padding. */
+    background: var(--color-gray-100); /* Background. */
+    border-radius: var(--radius-lg); /* Border radius. */
+}
+
+.user-avatar { /* Avatar user. */
+    width: 32px; /* Width. */
+    height: 32px; /* Height. */
+    background: var(--color-primary); /* Background primary. */
+    color: var(--color-white); /* Color putih. */
+    border-radius: 50%; /* Border radius circle. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    justify-content: center; /* Justify center. */
+    font-weight: var(--font-weight-semibold); /* Weight. */
+    font-size: 0.875rem; /* Font size. */
+}
+
+.user-name { /* Name user. */
+    font-weight: var(--font-weight-medium); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+}
+
+.user-role { /* Role user. */
+    font-size: 0.75rem; /* Font size. */
+    color: var(--color-gray-600); /* Color. */
+    padding: 0.25rem 0.5rem; /* Padding. */
+    background: var(--color-white); /* Background. */
+    border-radius: var(--radius-sm); /* Border radius. */
+}
+
+.main-container { /* Container utama. */
+    max-width: 1400px; /* Max width. */
+    margin: 0 auto; /* Margin auto. */
+    padding: var(--spacing-2xl) var(--spacing-lg); /* Padding. */
+}
+
+.content-wrapper { /* Wrapper konten. */
+    animation: fadeIn 0.5s ease; /* Animation fade in. */
+}
+
+@keyframes fadeIn { /* Keyframe fade in. */
+    from { /* From. */
+        opacity: 0; /* Opacity 0. */
+    }
+    to { /* To. */
+        opacity: 1; /* Opacity 1. */
+    }
+}
+
+.page-header { /* Header halaman. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    justify-content: space-between; /* Justify space between. */
+    margin-bottom: var(--spacing-2xl); /* Margin bottom. */
+    flex-wrap: wrap; /* Wrap. */
+    gap: var(--spacing-md); /* Gap. */
+}
+
+.page-header h1 { /* H1 header. */
+    font-size: 2.25rem; /* Font size. */
+    font-weight: var(--font-weight-bold); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+    margin-bottom: var(--spacing-xs); /* Margin. */
+}
+
+.page-header p { /* P header. */
+    font-size: 1rem; /* Font size. */
+    color: var(--color-gray-600); /* Color. */
+}
+
+.dashboard-section { /* Section dashboard. */
+    background: var(--color-white); /* Background putih. */
+    border-radius: var(--radius-2xl); /* Border radius. */
+    padding: var(--spacing-2xl); /* Padding. */
+    box-shadow: var(--shadow-md); /* Shadow. */
+}
+
+.section-header { /* Header section. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    justify-content: space-between; /* Justify space between. */
+    margin-bottom: var(--spacing-xl); /* Margin bottom. */
+    flex-wrap: wrap; /* Wrap. */
+    gap: var(--spacing-md); /* Gap. */
+}
+
+.section-header h2 { /* H2 header. */
+    font-size: 1.5rem; /* Font size. */
+    font-weight: var(--font-weight-semibold); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+}
+
+.stats-grid { /* Grid statistik. */
+    display: grid; /* Grid. */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Auto fit. */
+    gap: var(--spacing-lg); /* Gap. */
+    margin-bottom: var(--spacing-2xl); /* Margin bottom. */
+}
+
+.stat-card { /* Card statistik. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    gap: var(--spacing-lg); /* Gap. */
+    padding: var(--spacing-xl); /* Padding. */
+    background: var(--color-gray-50); /* Background. */
+    border-radius: var(--radius-xl); /* Border radius. */
+    transition: all var(--transition-base); /* Transition. */
+}
+
+.stat-card:hover { /* Hover card. */
+    background: var(--color-white); /* Background putih. */
+    box-shadow: var(--shadow-md); /* Shadow. */
+    transform: translateY(-2px); /* Translate up. */
+}
+
+.stat-icon { /* Icon statistik. */
+    font-size: 2.5rem; /* Font size. */
+}
+
+.stat-content { /* Konten statistik. */
+    flex: 1; /* Flex 1. */
+}
+
+.stat-value { /* Value statistik. */
+    font-size: 2rem; /* Font size. */
+    font-weight: var(--font-weight-bold); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+}
+
+.stat-label { /* Label statistik. */
+    font-size: 0.875rem; /* Font size. */
+    color: var(--color-gray-600); /* Color. */
+}
+
+.table-container { /* Container tabel. */
+    overflow-x: auto; /* Overflow x auto. */
+    border-radius: var(--radius-xl); /* Border radius. */
+    border: 1px solid var(--color-gray-200); /* Border. */
+}
+
+.data-table { /* Tabel data. */
+    width: 100%; /* Width full. */
+    border-collapse: collapse; /* Border collapse. */
+    background: var(--color-white); /* Background. */
+}
+
+.data-table thead { /* Thead tabel. */
+    background: var(--color-gray-50); /* Background. */
+}
+
+.data-table th { /* Th tabel. */
+    padding: 1rem 1.25rem; /* Padding. */
+    text-align: left; /* Text align left. */
+    font-size: 0.875rem; /* Font size. */
+    font-weight: var(--font-weight-semibold); /* Weight. */
+    color: var(--color-gray-700); /* Color. */
+    text-transform: uppercase; /* Uppercase. */
+    letter-spacing: 0.05em; /* Letter spacing. */
+}
+
+.data-table tbody tr { /* Tr tbody. */
+    border-top: 1px solid var(--color-gray-200); /* Border top. */
+    transition: background-color var(--transition-fast); /* Transition. */
+}
+
+.data-table tbody tr:hover { /* Hover tr. */
+    background: var(--color-gray-50); /* Background. */
+}
+
+.data-table td { /* Td tabel. */
+    padding: 1rem 1.25rem; /* Padding. */
+    font-size: 0.95rem; /* Font size. */
+    color: var(--color-gray-900); /* Color. */
+}
+
+.badge { /* Badge. */
+    display: inline-block; /* Inline block. */
+    padding: 0.25rem 0.75rem; /* Padding. */
+    font-size: 0.75rem; /* Font size. */
+    font-weight: var(--font-weight-medium); /* Weight. */
+    background: var(--color-primary); /* Background. */
+    color: var(--color-white); /* Color. */
+    border-radius: var(--radius-md); /* Border radius. */
+}
+
+.profile-card { /* Card profil. */
+    background: var(--color-white); /* Background. */
+    border-radius: var(--radius-2xl); /* Border radius. */
+    overflow: hidden; /* Overflow hidden. */
+    box-shadow: var(--shadow-md); /* Shadow. */
+}
+
+.profile-header { /* Header profil. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    gap: var(--spacing-lg); /* Gap. */
+    padding: var(--spacing-2xl); /* Padding. */
+    background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-white) 100%); /* Background gradient. */
+}
+
+.profile-avatar { /* Avatar profil. */
+    width: 80px; /* Width. */
+    height: 80px; /* Height. */
+    background: var(--color-primary); /* Background. */
+    color: var(--color-white); /* Color. */
+    border-radius: 50%; /* Circle. */
+    display: flex; /* Flex. */
+    align-items: center; /* Align center. */
+    justify-content: center; /* Justify center. */
+    font-weight: var(--font-weight-bold); /* Weight. */
+    font-size: 2rem; /* Font size. */
+}
+
+.profile-avatar.large { /* Avatar large. */
+    width: 100px; /* Width. */
+    height: 100px; /* Height. */
+    font-size: 2.5rem; /* Font size. */
+}
+
+.profile-info h3 { /* H3 info. */
+    font-size: 1.75rem; /* Font size. */
+    font-weight: var(--font-weight-bold); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+    margin-bottom: var(--spacing-xs); /* Margin. */
+}
+
+.profile-id { /* ID profil. */
+    font-size: 0.95rem; /* Font size. */
+    color: var(--color-gray-600); /* Color. */
+}
+
+.profile-body { /* Body profil. */
+    padding: var(--spacing-2xl); /* Padding. */
+}
+
+.info-row { /* Row info. */
+    display: flex; /* Flex. */
+    justify-content: space-between; /* Justify space between. */
+    align-items: center; /* Align center. */
+    padding: var(--spacing-lg) 0; /* Padding. */
+    border-bottom: 1px solid var(--color-gray-200); /* Border bottom. */
+}
+
+.info-row:last-child { /* Last child. */
+    border-bottom: none; /* No border. */
+}
+
+.info-label { /* Label info. */
+    font-weight: var(--font-weight-medium); /* Weight. */
+    color: var(--color-gray-600); /* Color. */
+    font-size: 0.95rem; /* Font size. */
+}
+
+.info-value { /* Value info. */
+    font-weight: var(--font-weight-medium); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+    text-align: right; /* Text align right. */
+}
+
+.form-card { /* Card form. */
+    background: var(--color-white); /* Background. */
+    border-radius: var(--radius-2xl); /* Border radius. */
+    padding: var(--spacing-2xl); /* Padding. */
+    box-shadow: var(--shadow-md); /* Shadow. */
+}
+
+.form-actions { /* Actions form. */
+    display: flex; /* Flex. */
+    gap: var(--spacing-md); /* Gap. */
+    justify-content: flex-end; /* Justify end. */
+    margin-top: var(--spacing-xl); /* Margin top. */
+}
+
+.empty-state { /* State kosong. */
+    text-align: center; /* Text center. */
+    padding: var(--spacing-2xl); /* Padding. */
+}
+
+.empty-icon { /* Icon kosong. */
+    font-size: 4rem; /* Font size. */
+    margin-bottom: var(--spacing-lg); /* Margin bottom. */
+    opacity: 0.5; /* Opacity. */
+}
+
+.empty-state h3 { /* H3 empty. */
+    font-size: 1.5rem; /* Font size. */
+    font-weight: var(--font-weight-semibold); /* Weight. */
+    color: var(--color-gray-900); /* Color. */
+    margin-bottom: var(--spacing-sm); /* Margin. */
+}
+
+.empty-state p { /* P empty. */
+    font-size: 1rem; /* Font size. */
+    color: var(--color-gray-600); /* Color. */
+    margin-bottom: var(--spacing-lg); /* Margin. */
+}
+
+.auth-footer { /* Footer auth. */
+    text-align: center; /* Text center. */
+    margin-top: var(--spacing-xl); /* Margin top. */
+    padding-top: var(--spacing-lg); /* Padding top. */
+    border-top: 1px solid var(--color-gray-200); /* Border top. */
+}
+
+.auth-footer p { /* P footer. */
+    font-size: 0.95rem; /* Font size. */
+    color: var(--color-gray-600); /* Color. */
+}
+
+.auth-footer a { /* A footer. */
+    color: var(--color-primary); /* Color primary. */
+    text-decoration: none; /* No decoration. */
+    font-weight: var(--font-weight-medium); /* Weight. */
+    transition: color var(--transition-fast); /* Transition. */
+}
+
+.auth-footer a:hover { /* Hover a. */
+    color: var(--color-primary-hover); /* Color hover. */
+}
+
+@media (max-width: 768px) { /* Media query mobile. */
+    .nav-container { /* Nav container. */
+        flex-direction: column; /* Column. */
+        gap: var(--spacing-md); /* Gap. */
+    }
+
+    .nav-user { /* Nav user. */
+        width: 100%; /* Width full. */
+        justify-content: center; /* Justify center. */
+    }
+
+    .page-header { /* Page header. */
+        flex-direction: column; /* Column. */
+        align-items: flex-start; /* Align start. */
+    }
+
+    .page-header h1 { /* H1 header. */
+        font-size: 1.75rem; /* Font size. */
+    }
+
+    .stats-grid { /* Stats grid. */
+        grid-template-columns: 1fr; /* 1 kolom. */
+    }
+
+    .profile-header { /* Profile header. */
+        flex-direction: column; /* Column. */
+        text-align: center; /* Text center. */
+    }
+
+    .info-row { /* Info row. */
+        flex-direction: column; /* Column. */
+        align-items: flex-start; /* Align start. */
+        gap: var(--spacing-xs); /* Gap. */
+    }
+
+    .info-value { /* Info value. */
+        text-align: left; /* Text left. */
+    }
+
+    .table-container { /* Table container. */
+        border-radius: var(--radius-md); /* Border radius. */
+    }
+
+    .data-table th, /* Th tabel. */
+    .data-table td { /* Td tabel. */
+        padding: 0.75rem; /* Padding. */
+        font-size: 0.875rem; /* Font size. */
+    }
+
+    .role-selector { /* Role selector. */
+        grid-template-columns: 1fr; /* 1 kolom. */
+    }
+
+    .form-actions { /* Form actions. */
+        flex-direction: column; /* Column. */
+    }
+
+    .form-actions .btn { /* Button actions. */
+        width: 100%; /* Width full. */
+    }
+}
+
+@keyframes pulse { /* Keyframe pulse. */
+    0%, 100% { /* 0 dan 100. */
+        opacity: 1; /* Opacity 1. */
+    }
+    50% { /* 50. */
+        opacity: 0.5; /* Opacity 0.5. */
+    }
+}
+
+.loading { /* Loading class. */
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; /* Animation pulse. */
+}
