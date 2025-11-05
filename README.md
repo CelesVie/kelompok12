@@ -40,11 +40,13 @@ A clean, minimal, and elegant web application built with PHP, MySQL, HTML, CSS, 
 ## File Structure
 
 ```
-project/
-├── config.php           # Database configuration and connection
-├── register.php         # User registration page
+kelompokdb/
+├── config.php          # Database configuration and connection
+├── register.php        # User registration page
 ├── login.php           # User login page
 ├── dashboard.php       # Main dashboard (role-based)
+├── flowchart.md        # Flowchart dari project ini
+├── index.php           # Redirect ke login.php
 ├── crud_siswa.php      # Student CRUD management (teachers only)
 ├── logout.php          # Session destruction and logout
 ├── style.css           # Apple-inspired styles
