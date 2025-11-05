@@ -1,6 +1,6 @@
 * { /* Reset semua elemen, kayak bersihin papan tulis sebelum mulai nulis. */
-    margin: 0; /* Margin 0. */
-    padding: 0; /* Padding 0. */
+    margin: 0; 
+    padding: 0; 
     box-sizing: border-box; /* Box-sizing border-box, biar kalkulasi lebih mudah. */
 }
 

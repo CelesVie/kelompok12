@@ -26,4 +26,4 @@ try { // Try block, kayak coba dulu deh, kalau berhasil oke banget, kalau error 
 if (session_status() === PHP_SESSION_NONE) { // If, cek status session, kalau belum ada (PHP_SESSION_NONE), baru mulai, kayak cek apakah pintu udah dikunci atau belum sebelum tidur.
     session_start(); // Panggil session_start, kayak tekan tombol start di mesin mobil, biar session aktif dan bisa nyimpen data user kayak simpen kenangan.
 }
-?> // Tutup PHP, kayak matiin mesin setelah selesai kerja, biar ga boros listrik dan bisa istirahat.
+?> 
