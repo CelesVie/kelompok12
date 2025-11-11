@@ -45,8 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Kalau POST.
             if ($stmt->execute()) { // Kalau berhasil.
                 if ($role === 'student') { // Kalau student.
                     $user_id = $conn->insert_id; // Ambil user ID baru.
-                    $stmt2 = $conn->prepare("INSERT INTO students (user_id, name, email) VALUES (?, ?, ?)"); // Prepare insert student.
-                    $stmt2->bind_param("iss", $user_id, $username, $email); // Bind.
+                    $stmt2 = $conn->prepare("INSERT INTO students (student_id, user_id, name, email) VALUES (?, ?, ?, ?)");
+                    $stmt2->bind_param("iiss", $user_id, $user_id, $username, $email); // Bind.
                     $stmt2->execute(); // Eksekusi.
                     $stmt2->close(); // Tutup.
                 }
