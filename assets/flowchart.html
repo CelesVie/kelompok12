@@ -328,7 +328,7 @@
           <!-- START -->
           <div
             class="node node-terminator"
-            data-info="Entry point - User accesses the application"
+            data-info="Entry point - User mengakses aplikasi"
           >
             START
           </div>
@@ -337,7 +337,7 @@
           <!-- Index/Redirect -->
           <div
             class="node node-process"
-            data-info="index.php - Redirects to login page"
+            data-info="index.php - Mengarahkan ke halaman login"
           >
             Access Application<br />(index.php)
           </div>
@@ -346,7 +346,7 @@
           <!-- Decision: Has Account? -->
           <div
             class="node node-decision"
-            data-info="User chooses between registration or login"
+            data-info="User memilih antara registration atau login"
           >
             Has Account?
           </div>
@@ -359,7 +359,7 @@
 
               <div
                 class="node node-io"
-                data-info="User fills registration form with username, email, password, role"
+                data-info="User mengisi formulir registrasi dengan username, email, password, role"
               >
                 Input Registration<br />Data (register.php)
               </div>
@@ -367,7 +367,7 @@
 
               <div
                 class="node node-process"
-                data-info="Validates input, checks duplicates, hashes password"
+                data-info="Validasi input, cek duplikat, hash password"
               >
                 Validate Input &<br />Hash Password
               </div>
@@ -375,7 +375,7 @@
 
               <div
                 class="node node-decision"
-                data-info="Checks if validation passed and no duplicate users"
+                data-info="Cek jika validasi berhasil dan tidak ada pengguna duplikat"
               >
                 Valid Data?
               </div>
@@ -383,7 +383,7 @@
 
               <div
                 class="node node-process"
-                data-info="Insert new user into database with hashed password"
+                data-info="Memasukkan pengguna baru ke database dengan password yang di-hash"
               >
                 Insert User to DB<br />(users table)
               </div>
@@ -391,7 +391,7 @@
 
               <div
                 class="node node-process"
-                data-info="Redirect user to login page after successful registration"
+                data-info="Mengalihkan pengguna ke halaman login setelah registrasi berhasil"
               >
                 Redirect to Login
               </div>
@@ -403,7 +403,7 @@
 
               <div
                 class="node node-io"
-                data-info="User enters username/email and password"
+                data-info="User memasukkan username/email dan password"
               >
                 Input Login<br />Credentials (login.php)
               </div>
@@ -411,7 +411,7 @@
 
               <div
                 class="node node-process"
-                data-info="Query database for user and verify password hash"
+                data-info="Query database untuk pengguna dan verifikasi hash password"
               >
                 Authenticate User<br />(password_verify)
               </div>
@@ -419,7 +419,7 @@
 
               <div
                 class="node node-decision"
-                data-info="Checks if credentials match database records"
+                data-info="Cek jika kredensial cocok dengan data di database"
               >
                 Valid Credentials?
               </div>
@@ -427,7 +427,7 @@
 
               <div
                 class="node node-process"
-                data-info="Create session with user data and role information"
+                data-info="Membuat sesi dengan data pengguna dan informasi peran"
               >
                 Create Session<br />(Session Management)
               </div>
@@ -435,7 +435,7 @@
 
               <div
                 class="node node-process"
-                data-info="Redirect to dashboard based on user role"
+                data-info="Mengalihkan ke dashboard berdasarkan role pengguna"
               >
                 Redirect to Dashboard
               </div>
@@ -447,7 +447,7 @@
 
           <div
             class="node node-decision"
-            data-info="System checks user role from session data"
+            data-info="Sistem memeriksa peran pengguna dari data sesi"
           >
             Check User Role
           </div>
@@ -460,7 +460,7 @@
 
               <div
                 class="node node-process"
-                data-info="Teacher dashboard with full CRUD access to student data"
+                data-info="Dashboard guru dengan akses CRUD penuh ke data siswa"
               >
                 Teacher Dashboard<br />(dashboard.php)
               </div>
@@ -468,7 +468,7 @@
 
               <div
                 class="node node-io"
-                data-info="View statistics and manage student records"
+                data-info="Melihat statistik dan mengelola data siswa"
               >
                 View Student Stats &<br />Access CRUD (crud_siswa.php)
               </div>
@@ -476,7 +476,7 @@
 
               <div
                 class="node node-decision"
-                data-info="Teacher selects CRUD operation to perform"
+                data-info="Guru memilih operasi CRUD yang akan dilakukan"
               >
                 Select Operation
               </div>
@@ -492,7 +492,7 @@
 
               <div
                 class="node node-process"
-                data-info="Changes saved to MySQL database with timestamps"
+                data-info="Perubahan disimpan ke database MySQL dengan cap waktu"
               >
                 Update Database<br />(MySQL)
               </div>
@@ -504,7 +504,7 @@
 
               <div
                 class="node node-process"
-                data-info="Student dashboard with read-only access"
+                data-info="Dashboard siswa dengan akses hanya baca"
               >
                 Student Dashboard<br />(dashboard.php)
               </div>
@@ -512,7 +512,7 @@
 
               <div
                 class="node node-io"
-                data-info="View personal profile and enrollment details"
+                data-info="Melihat profil pribadi dan detail pendaftaran"
               >
                 View Personal<br />Profile (Read-Only)
               </div>
@@ -520,7 +520,7 @@
 
               <div
                 class="node node-process"
-                data-info="Display student's own data from database"
+                data-info="Menampilkan data siswa sendiri dari database"
               >
                 Fetch Student Data<br />from students table
               </div>
@@ -528,7 +528,7 @@
 
               <div
                 class="node node-io"
-                data-info="Show name, ID, email, grade, phone, address"
+                data-info="Menampilkan name, ID, email, grade, phone, address"
               >
                 Display Student<br />Information
               </div>
@@ -538,21 +538,21 @@
           <!-- Logout -->
           <div class="arrow" style="height: 40px"></div>
 
-          <div class="node node-decision" data-info="User clicks logout button">
+          <div class="node node-decision" data-info="User klik logout button">
             Logout?
           </div>
           <div class="arrow" style="height: 40px"></div>
 
           <div
             class="node node-process"
-            data-info="Destroy session and clear authentication data"
+            data-info="Destroy session dan menghapus data autentikasi"
           >
             Destroy Session<br />(logout.php)
           </div>
           <div class="arrow" style="height: 40px"></div>
 
           <!-- END -->
-          <div class="node node-end" data-info="User exits the application">
+          <div class="node node-end" data-info="User exit dari aplikasi">
             END
           </div>
         </div>
