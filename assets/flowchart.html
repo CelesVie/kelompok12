@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Management System Flowchart</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        text-align: center;
+        color: #1c1c1e;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #6b7280;
+        font-size: 1rem;
+        margin-bottom: 30px;
+        font-weight: 400;
+      }
+
+      .controls {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 10px 24px;
+        border: none;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-secondary:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      .flowchart-wrapper {
+        position: relative;
+        width: 100%;
+        height: 800px;
+        overflow: auto;
+        background: #f9fafb;
+        border-radius: 16px;
+        padding: 40px;
+        border: 2px solid #e5e7eb;
+      }
+
+      .flowchart {
+        position: relative;
+        width: fit-content;
+        margin: 0 auto;
+        transform-origin: center;
+        transition: transform 0.3s ease;
+      }
+
+      .node {
+        position: relative;
+        padding: 16px 24px;
+        margin: 20px auto;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #1c1c1e;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.5s ease;
+        max-width: 280px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .node:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      .node-terminator {
+        background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+      }
+
+      .node-process {
+        background: white;
+        border: 2px solid #007aff;
+        border-radius: 12px;
+      }
+
+      .node-decision {
+        background: linear-gradient(135deg, #ff9500 0%, #ff9f0a 100%);
+        color: white;
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        padding: 24px 32px;
+        font-weight: 600;
+      }
+
+      .node-io {
+        background: linear-gradient(135deg, #5856d6 0%, #5e5ce6 100%);
+        color: white;
+        clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        padding: 16px 32px;
+        font-weight: 600;
+      }
+
+      .node-end {
+        background: linear-gradient(135deg, #ff3b30 0%, #ff453a 100%);
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+      }
+
+      .arrow {
+        position: absolute;
+        width: 2px;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all 0.3s ease;
+      }
+
+      .arrow::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 12px solid #764ba2;
+      }
+
+      .branch-container {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        margin: 40px 0;
+      }
+
+      .branch {
+        flex: 1;
+        max-width: 400px;
+      }
+
+      .branch-label {
+        text-align: center;
+        font-weight: 600;
+        color: #667eea;
+        margin: 10px 0;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .legend {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 30px;
+        flex-wrap: wrap;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        border: 2px solid #e5e7eb;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: #6b7280;
+      }
+
+      .legend-shape {
+        width: 40px;
+        height: 24px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .shape-terminator {
+        background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
+        border-radius: 12px;
+      }
+
+      .shape-process {
+        background: white;
+        border: 2px solid #007aff;
+        border-radius: 6px;
+      }
+
+      .shape-decision {
+        background: linear-gradient(135deg, #ff9500 0%, #ff9f0a 100%);
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      }
+
+      .shape-io {
+        background: linear-gradient(135deg, #5856d6 0%, #5e5ce6 100%);
+        clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+      }
+
+      .tooltip {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s;
+        z-index: 1000;
+        max-width: 200px;
+      }
+
+      .zoom-level {
+        text-align: center;
+        color: #6b7280;
+        font-size: 13px;
+        margin-top: 15px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .branch-container {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .flowchart-wrapper {
+          height: 600px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>School Management System</h1>
+      <p class="subtitle">Interactive System Flowchart - kelompok12 Project</p>
+
+      <div class="controls">
+        <button class="btn btn-primary" onclick="zoomIn()">Zoom In (+)</button>
+        <button class="btn btn-primary" onclick="zoomOut()">
+          Zoom Out (-)
+        </button>
+        <button class="btn btn-secondary" onclick="resetZoom()">
+          Reset View
+        </button>
+      </div>
+
+      <div class="flowchart-wrapper" id="flowchart-wrapper">
+        <div class="flowchart" id="flowchart">
+          <!-- START -->
+          <div
+            class="node node-terminator"
+            data-info="Entry point - User accesses the application"
+          >
+            START
+          </div>
+          <div class="arrow" style="height: 40px"></div>
+
+          <!-- Index/Redirect -->
+          <div
+            class="node node-process"
+            data-info="index.php - Redirects to login page"
+          >
+            Access Application<br />(index.php)
+          </div>
+          <div class="arrow" style="height: 40px"></div>
+
+          <!-- Decision: Has Account? -->
+          <div
+            class="node node-decision"
+            data-info="User chooses between registration or login"
+          >
+            Has Account?
+          </div>
+
+          <!-- Branch Container -->
+          <div class="branch-container">
+            <!-- NO Branch - Registration -->
+            <div class="branch">
+              <div class="branch-label">NO - Register</div>
+
+              <div
+                class="node node-io"
+                data-info="User fills registration form with username, email, password, role"
+              >
+                Input Registration<br />Data (register.php)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Validates input, checks duplicates, hashes password"
+              >
+                Validate Input &<br />Hash Password
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-decision"
+                data-info="Checks if validation passed and no duplicate users"
+              >
+                Valid Data?
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Insert new user into database with hashed password"
+              >
+                Insert User to DB<br />(users table)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Redirect user to login page after successful registration"
+              >
+                Redirect to Login
+              </div>
+            </div>
+
+            <!-- YES Branch - Login -->
+            <div class="branch">
+              <div class="branch-label">YES - Login</div>
+
+              <div
+                class="node node-io"
+                data-info="User enters username/email and password"
+              >
+                Input Login<br />Credentials (login.php)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Query database for user and verify password hash"
+              >
+                Authenticate User<br />(password_verify)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-decision"
+                data-info="Checks if credentials match database records"
+              >
+                Valid Credentials?
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Create session with user data and role information"
+              >
+                Create Session<br />(Session Management)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Redirect to dashboard based on user role"
+              >
+                Redirect to Dashboard
+              </div>
+            </div>
+          </div>
+
+          <!-- After branches merge -->
+          <div class="arrow" style="height: 40px"></div>
+
+          <div
+            class="node node-decision"
+            data-info="System checks user role from session data"
+          >
+            Check User Role
+          </div>
+
+          <!-- Role-based Dashboard -->
+          <div class="branch-container">
+            <!-- Teacher Branch -->
+            <div class="branch">
+              <div class="branch-label">TEACHER</div>
+
+              <div
+                class="node node-process"
+                data-info="Teacher dashboard with full CRUD access to student data"
+              >
+                Teacher Dashboard<br />(dashboard.php)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-io"
+                data-info="View statistics and manage student records"
+              >
+                View Student Stats &<br />Access CRUD (crud_siswa.php)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-decision"
+                data-info="Teacher selects CRUD operation to perform"
+              >
+                Select Operation
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Create, Read, Update, or Delete student records"
+              >
+                Perform CRUD<br />on students table
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Changes saved to MySQL database with timestamps"
+              >
+                Update Database<br />(MySQL)
+              </div>
+            </div>
+
+            <!-- Student Branch -->
+            <div class="branch">
+              <div class="branch-label">STUDENT</div>
+
+              <div
+                class="node node-process"
+                data-info="Student dashboard with read-only access"
+              >
+                Student Dashboard<br />(dashboard.php)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-io"
+                data-info="View personal profile and enrollment details"
+              >
+                View Personal<br />Profile (Read-Only)
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-process"
+                data-info="Display student's own data from database"
+              >
+                Fetch Student Data<br />from students table
+              </div>
+              <div class="arrow" style="height: 30px"></div>
+
+              <div
+                class="node node-io"
+                data-info="Show name, ID, email, grade, phone, address"
+              >
+                Display Student<br />Information
+              </div>
+            </div>
+          </div>
+
+          <!-- Logout -->
+          <div class="arrow" style="height: 40px"></div>
+
+          <div class="node node-decision" data-info="User clicks logout button">
+            Logout?
+          </div>
+          <div class="arrow" style="height: 40px"></div>
+
+          <div
+            class="node node-process"
+            data-info="Destroy session and clear authentication data"
+          >
+            Destroy Session<br />(logout.php)
+          </div>
+          <div class="arrow" style="height: 40px"></div>
+
+          <!-- END -->
+          <div class="node node-end" data-info="User exits the application">
+            END
+          </div>
+        </div>
+      </div>
+
+      <div class="zoom-level">Zoom: <span id="zoom-level">100%</span></div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-shape shape-terminator"></div>
+          <span>Start/End (Terminator)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-shape shape-process"></div>
+          <span>Process/Action</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-shape shape-decision"></div>
+          <span>Decision Point</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-shape shape-io"></div>
+          <span>Input/Output</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+      let zoomLevel = 1;
+      const flowchart = document.getElementById("flowchart");
+      const tooltip = document.getElementById("tooltip");
+      const zoomLevelText = document.getElementById("zoom-level");
+
+      function zoomIn() {
+        zoomLevel = Math.min(zoomLevel + 0.1, 2);
+        updateZoom();
+      }
+
+      function zoomOut() {
+        zoomLevel = Math.max(zoomLevel - 0.1, 0.5);
+        updateZoom();
+      }
+
+      function resetZoom() {
+        zoomLevel = 1;
+        updateZoom();
+      }
+
+      function updateZoom() {
+        flowchart.style.transform = `scale(${zoomLevel})`;
+        zoomLevelText.textContent = Math.round(zoomLevel * 100) + "%";
+      }
+
+      // Tooltip functionality
+      const nodes = document.querySelectorAll(".node");
+      nodes.forEach((node) => {
+        node.addEventListener("mouseenter", (e) => {
+          const info = node.getAttribute("data-info");
+          if (info) {
+            tooltip.textContent = info;
+            tooltip.style.opacity = "1";
+            updateTooltipPosition(e);
+          }
+        });
+
+        node.addEventListener("mousemove", updateTooltipPosition);
+
+        node.addEventListener("mouseleave", () => {
+          tooltip.style.opacity = "0";
+        });
+      });
+
+      function updateTooltipPosition(e) {
+        tooltip.style.left = e.pageX + 15 + "px";
+        tooltip.style.top = e.pageY + 15 + "px";
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "+" || e.key === "=") {
+          zoomIn();
+        } else if (e.key === "-" || e.key === "_") {
+          zoomOut();
+        } else if (e.key === "0") {
+          resetZoom();
+        }
+      });
+
+      // Smooth scroll
+      const wrapper = document.getElementById("flowchart-wrapper");
+      let isScrolling = false;
+      let startY;
+      let scrollTop;
+
+      wrapper.addEventListener("mousedown", (e) => {
+        if (e.button === 1) {
+          // Middle mouse button
+          isScrolling = true;
+          startY = e.pageY - wrapper.offsetTop;
+          scrollTop = wrapper.scrollTop;
+          wrapper.style.cursor = "grabbing";
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isScrolling) return;
+        e.preventDefault();
+        const y = e.pageY - wrapper.offsetTop;
+        const walk = (y - startY) * 2;
+        wrapper.scrollTop = scrollTop - walk;
+      });
+
+      document.addEventListener("mouseup", () => {
+        isScrolling = false;
+        wrapper.style.cursor = "default";
+      });
+
+      // Add animation delays
+      const allNodes = document.querySelectorAll(".node");
+      allNodes.forEach((node, index) => {
+        node.style.animationDelay = `${index * 0.05}s`;
+      });
+    </script>
+  </body>
+</html>
