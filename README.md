@@ -45,7 +45,6 @@ kelompokdb/
 ├── register.php        # User registration page
 ├── login.php           # User login page
 ├── dashboard.php       # Main dashboard (role-based)
-├── flowchart.md        # Flowchart dari project ini
 ├── index.php           # Redirect ke login.php
 ├── crud_siswa.php      # Student CRUD management (teachers only)
 ├── logout.php          # Session destruction and logout
@@ -82,17 +81,17 @@ define('DB_NAME', 'school_system');
 
 Copy all files to your web server directory:
 
-- **XAMPP**: `C:\xampp\htdocs\school-system\`
-- **WAMP**: `C:\wamp64\www\school-system\`
-- **MAMP**: `/Applications/MAMP/htdocs/school-system/`
-- **Linux**: `/var/www/html/school-system/`
+- **XAMPP**: `C:\xampp\htdocs\kelompok12\`
+- **WAMP**: `C:\wamp64\www\kelompok12\`
+- **MAMP**: `/Applications/MAMP/htdocs/kelompok12/`
+- **Linux**: `/var/www/html/kelompok12/`
 
 ### 4. Access the Application
 
 Open your browser and navigate to:
 
 ```
-http://localhost/school-system/login.php
+http://localhost/kelompok12
 ```
 
 ## Usage
